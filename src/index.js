@@ -2,7 +2,12 @@ import  express  from "express";
 import morgan from "morgan"
 const app = express();
 
+// Settings
+app.set('appName', 'Fazt Express Tutorial')
+app.set('port', 3000)
+app.set('view engine', 'ejs')
 
+// Middlewares
 
 app.use(express.json())
 app.use(morgan('dev'))
@@ -11,6 +16,11 @@ app.use(morgan('dev'))
     console.log('Por aqui paso ')
     next(); 
 }) */
+
+app.get('/', (req, res)=>{
+    const data = [{name: 'john'}, {name: 'joe'}, {name:'cameron'}, {name: 'ryan'}]
+    res.render('index.ejs', {people: data})
+})
 
 app.get('/user', (req, res)=>{
     res.json({
@@ -36,5 +46,6 @@ app.delete('/user/:userid',(req, res)=>{
 
 app.use(express.static('public'))
 
-app.listen(5000)
-console.log('server on port 5000')
+app.listen(app.get('port'))
+console.log(app.get('appName'))
+console.log('server on port', app.get('port'))
