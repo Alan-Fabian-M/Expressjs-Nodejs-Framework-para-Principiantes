@@ -34,5 +34,7 @@ app.delete('/user/:userid',(req, res)=>{
     res.send(`User ${req.params.userid} deleted`)
 })
 
+app.use(express.static('public'))
+
 app.listen(5000)
 console.log('server on port 5000')
