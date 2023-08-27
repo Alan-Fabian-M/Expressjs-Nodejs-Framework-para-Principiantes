@@ -1,12 +1,16 @@
 import  express  from "express";
+import morgan from "morgan"
 const app = express();
 
-app.use(express.json())
 
-app.all('/user', (req, res, next)=>{
+
+app.use(express.json())
+app.use(morgan('dev'))
+
+/* app.all('/user', (req, res, next)=>{
     console.log('Por aqui paso ')
-    next();
-})
+    next(); 
+}) */
 
 app.get('/user', (req, res)=>{
     res.json({
